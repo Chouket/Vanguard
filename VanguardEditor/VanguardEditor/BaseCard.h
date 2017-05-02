@@ -50,6 +50,11 @@ namespace Vanguard
 		SPIKE_BROTHERS,
 		GEAR_CHRONICLE,
 
+		//Zoo
+		NEO_NECTAR,
+		GREAT_NATURE,
+		MEGA_COLONY,
+
 		//Magallanica
 		GRANBLUE,
 		BERMUDA_TRIANGLE,
@@ -70,6 +75,8 @@ namespace Vanguard
 		// Link Joker, Nova Grappler, Dimension Police, Etranger
 		DARK_ZONE,
 		// Dark Irregulars, Pale Moon, Spike Brothers, Gear Chronicle
+		ZOO,
+		// Neo Nectar, Great Nature, Mega Colony
 		MAGALLANICA,
 		// Granblue, Bermuda Triangle, Aqua Force
 
@@ -81,41 +88,22 @@ namespace Vanguard
 	class BaseCard
 	{
 	public:
-		BaseCard(std::string name, unsigned int grade, unsigned int atk, unsigned int def /*may already be defined*/,
-				UNIT_TYPE type, UNIT_CLAN clan, std::string flavourTxt, std::string effectDesc)
-		{
-			_name = name;
-			_grade = grade;
-			_atk = atk;
-			_def = def;
-			_type = type;
-			_clan = clan;
-			_flavourTxt = flavourTxt;
-			_effectDescript = effectDesc;
-			_id = last_id;
-			last_id++;
-		};
+		BaseCard(std::string name, unsigned int grade,
+				 unsigned int atk, unsigned int def,
+				 UNIT_TYPE type, UNIT_CLAN clan,
+				 std::string flavourTxt, std::string effectDesc);
 
-		void Show()
-		{
-			//put into str
-			std::cout << " ~~~~~~~~~~~~~~~~~~ " << std::endl;
-			std::cout << " Name : " << _name.c_str() << "       id : " << _id << std::endl;
-			std::cout << std::endl;
-			std::cout << " -> Grade : " << _grade << std::endl;
-			std::cout << " -> Attaque : " << _atk << std::endl;
-			std::cout << " -> Defense : " << _def << std::endl;
-			std::cout << std::endl;
-			std::cout << " -> Type : " << _type << std::endl;
-			std::cout << " -> Clan : " << _clan << std::endl;
-			std::cout << " -> Nation : " << _nation << std::endl;
-			std::cout << std::endl;
-			std::cout << " -> Flavour Text : " << _flavourTxt.c_str() << std::endl;
-			std::cout << " -> Effect Description : " << _effectDescript.c_str() << std::endl;
-			std::cout << std::endl;
-		}
+		void Show();
 
 	private:
+		//Function
+		UNIT_NATION GetNationFromClan(UNIT_CLAN clan);
+		std::string GetTypeNameFromTypeEnum(UNIT_TYPE type);
+		std::string GetClanNameFromClanEnum(UNIT_CLAN clan);
+		std::string GetNationNameFromNationEnum(UNIT_NATION nation);
+
+
+		//Variable
 		std::string _name = "None";
 
 		//image ?

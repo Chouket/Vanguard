@@ -7,7 +7,7 @@
 
 int main()
 {
-	std::cout << "coucou" << std::endl;
+	std::cout << "Get Rekt" << std::endl;
 
 	Vanguard::BaseCard firstCard = Vanguard::BaseCard("Harri", 3, 11000, 5000,
 		Vanguard::UNIT_TYPE::NORMAL,

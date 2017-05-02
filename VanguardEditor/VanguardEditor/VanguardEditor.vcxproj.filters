@@ -41,5 +41,8 @@
     <ClCompile Include="VanguardEditor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BaseCard.cpp">
+      <Filter>Source Files\Card</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
