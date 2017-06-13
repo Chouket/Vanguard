@@ -7,7 +7,6 @@ public class CardStats
 {
     [SerializeField] private string _name = "None";
 
-
     [SerializeField] private uint _grade;
     [SerializeField] private uint _atk;
     [SerializeField] private uint _def;
@@ -15,7 +14,7 @@ public class CardStats
 }
 
 
-public class AbstractCard : MonoBehaviour {
+public class BaseCard : MonoBehaviour {
 
 	// Use this for initialization
 	void Start ()
@@ -113,7 +112,7 @@ public class AbstractCard : MonoBehaviour {
     #endregion
 
     //Function
-    UNIT_NATION GetNationFromClan(UNIT_CLAN clan)
+    private UNIT_NATION GetNationFromClan(UNIT_CLAN clan)
     {
         if (clan <= UNIT_CLAN.NO_CLAN || clan >= UNIT_CLAN.CLAN_NB)
             return UNIT_NATION.NO_NATION;
@@ -139,31 +138,22 @@ public class AbstractCard : MonoBehaviour {
         return UNIT_NATION.MAGALLANICA;
     }
 
-    //string GetName()
-    //{
-    //    return "";
-    //}
+    #region Getter/Setter
 
+
+
+    #endregion
+    
     //Variable
-    //[SerializeField] private string _name = "None";
-
-
-    //[SerializeField] private uint _grade;
-    //[SerializeField] private uint _atk;
-    //[SerializeField] private uint _def;
-    //[SerializeField] private uint _crit;
 
     [SerializeField] private CardStats _currentStats;
     private CardStats _buffedStats;
 
-    [SerializeField] private Texture _img;
+    //[SerializeField] private Texture _img;
 
     [SerializeField] private UNIT_TYPE _type;
     [SerializeField] private UNIT_CLAN _clan;
     private UNIT_NATION _nation;
-
-    [SerializeField] private string _flavourTxt;
-    [SerializeField] private string _effectDescript;
   }
 
 
