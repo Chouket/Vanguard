@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [System.Serializable]
 public class CardStats
 {
@@ -11,23 +12,24 @@ public class CardStats
     [SerializeField] private uint _atk;
     [SerializeField] private uint _def;
     [SerializeField] private uint _crit;
+    [SerializeField] private uint _drive;
 }
 
 
 public class BaseCard : MonoBehaviour {
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start()
     {
         _nation = GetNationFromClan(_clan);
 
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
-		
-	}
+        //Flip();
+    }
 
     #region Enum
 
@@ -112,6 +114,28 @@ public class BaseCard : MonoBehaviour {
     #endregion
 
     //Function
+
+    public void Activate()
+    {
+
+    }
+
+
+    public void Show()
+    {
+
+    }
+
+    public void Flip()
+    {
+        transform.Rotate(Vector3.up, 180.0f);
+    }
+
+    #region Getter/Setter
+
+
+    #endregion
+    
     private UNIT_NATION GetNationFromClan(UNIT_CLAN clan)
     {
         if (clan <= UNIT_CLAN.NO_CLAN || clan >= UNIT_CLAN.CLAN_NB)
@@ -138,22 +162,21 @@ public class BaseCard : MonoBehaviour {
         return UNIT_NATION.MAGALLANICA;
     }
 
-    #region Getter/Setter
-
-
-
-    #endregion
-    
     //Variable
 
     [SerializeField] private CardStats _currentStats;
     private CardStats _buffedStats;
 
-    //[SerializeField] private Texture _img;
-
     [SerializeField] private UNIT_TYPE _type;
     [SerializeField] private UNIT_CLAN _clan;
     private UNIT_NATION _nation;
+
+    //Status
+    bool _stand;
+    bool _legion;
+    // bool etc...;
+
+  //  private UNIT_PLACE
   }
 
 
