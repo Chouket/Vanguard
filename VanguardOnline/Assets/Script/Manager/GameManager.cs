@@ -14,9 +14,16 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-	void Start ()
+    private StepManager _stepManager = null;
+    private PlayerManager _playerManager = null;
+    private NetworkManager _networkManager = null;
+
+    void Start ()
     {
-	}
+        _stepManager = new StepManager();
+        _playerManager = PlayerManager.Instance;
+        _networkManager = NetworkManager.Instance;
+    }
 	
 	void Update ()
     {
