@@ -1,19 +1,34 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class Hand : PileZone {
 
-	// Use this for initialization
-	void Start ()
+    void Start ()
     {
         Shuffle();
     }
 	
-	// Update is called once per frame
+	
 	void Update ()
     {
-	
-	}
+       // Shuffle();
+    }
+
+    public override void AddCard(BaseCard card)
+    {
+        if (!card)
+            return;
+
+        base.AddCard(card);
+        UpdateCardPosition();
+    }
+
+    public void Discard(BaseCard card)
+    {
+        RemoveCard(card);
+        UpdateCardPosition();
+    }
 
     void Shuffle()
     {
@@ -31,14 +46,18 @@ public class Hand : PileZone {
 
     void UpdateCardPosition()
     {
-        Vector3 pos = transform.position;
-        int cardNb = _cards.Count;
-        pos.x -= cardNb / 4f;
+        Vector3 left = transform.position - Vector3.right * (_handGraphicSize / 2f);
+        Vector3 right = transform.position - Vector3.left * (_handGraphicSize / 2f);
+        Vector3 delta = right - left;
 
-        float offset = 1f / (cardNb / 5f);
+        int cardNb = _cards.Count;
+        float gapsNb = cardNb - 1;
+        Vector3 gap = delta / gapsNb;
+
         for (int idx = 0; idx < cardNb; idx++)
         {
-            _cards[idx].transform.position = pos + (offset * idx * Vector3.right) + Vector3.forward * idx * 0.01f;
+            Vector3 lisibilityOffset = idx * 0.01f * Vector3.forward;
+            _cards[idx].transform.position = left + (gap * idx) + lisibilityOffset;
         }
     }
 
@@ -46,4 +65,6 @@ public class Hand : PileZone {
     {
         card.SetCurrentZone(ZONE.HAND);
     }
+
+    const float _handGraphicSize = 5f;
 }
