@@ -14,7 +14,7 @@ public abstract class PileZone : BaseZone {
 	
 	}
 
-    protected override abstract void UpdateCardCurrentZone();
+    protected override abstract void UpdateCardCurrentZone(BaseCard card);
 
     [SerializeField] //to remove
      protected List<BaseCard> _cards;

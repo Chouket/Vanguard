@@ -1,11 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class StepManager : MonoBehaviour {
+public class StepManager : MonoBehaviour
+{
+    static private StepManager instance = null;
+    static public StepManager Instance
+    {
+        get
+        {
+            if (instance == null)
+                instance = new StepManager();
+            return instance;
+        }
+    }
 
     public enum GamePhase
     {
-        IddlePhase = 0,
+        IdlePhase = 0,
         StandPhase,
         DrawPhase,
         RidePhase,
@@ -19,7 +30,7 @@ public class StepManager : MonoBehaviour {
     public enum GameStep
     {
         //Generic
-        IddleStep = 0,
+        IdleStep = 0,
         // DrawPhase
         DrawStep,
         GAssistStep,
@@ -38,11 +49,13 @@ public class StepManager : MonoBehaviour {
 
 	void Start ()
     {
-        _currentPhase = GamePhase.IddlePhase;
-        _currentStep = GameStep.IddleStep;
+        _currentPhase = GamePhase.IdlePhase;
+        _currentStep = GameStep.IdleStep;
 	}
 	
 	void Update ()
     {
+
+
 	}
 }

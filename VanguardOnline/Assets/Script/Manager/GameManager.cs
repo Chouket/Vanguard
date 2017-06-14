@@ -17,12 +17,16 @@ public class GameManager : MonoBehaviour {
     private StepManager _stepManager = null;
     private PlayerManager _playerManager = null;
     private NetworkManager _networkManager = null;
+    private GuiManager _guiManager = null;
+    private Cardmanager _cardManager = null;
 
     void Start ()
     {
-        _stepManager = new StepManager();
+        _stepManager = StepManager.Instance;
         _playerManager = PlayerManager.Instance;
         _networkManager = NetworkManager.Instance;
+        _guiManager = GuiManager.Instance;
+        _cardManager = Cardmanager.Instance;
     }
 	
 	void Update ()

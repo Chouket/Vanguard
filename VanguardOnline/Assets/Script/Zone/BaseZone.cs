@@ -4,7 +4,7 @@ using System.Collections;
 
 public abstract class BaseZone : MonoBehaviour
 {
-    enum ZONE
+    public enum ZONE
     {
         NONE = 0,
         DECK,
@@ -15,8 +15,8 @@ public abstract class BaseZone : MonoBehaviour
         TRIGGER,
         REARGUARD,
         VANGUARD,
-        GUARDIAN//,
-        //GENERATION
+        GUARDIAN,
+        GENERATION
     }
 
 
@@ -31,5 +31,5 @@ public abstract class BaseZone : MonoBehaviour
 	}
 
 
-    protected abstract void UpdateCardCurrentZone();
+    protected abstract void UpdateCardCurrentZone(BaseCard card);
 }

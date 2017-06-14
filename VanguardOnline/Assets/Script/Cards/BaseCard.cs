@@ -6,29 +6,32 @@ using UnityEngine;
 [System.Serializable]
 public class CardStats
 {
-    [SerializeField] private string _name = "None";
+    public string _name = "None";
 
-    [SerializeField] private uint _grade;
-    [SerializeField] private uint _atk;
-    [SerializeField] private uint _def;
-    [SerializeField] private uint _crit;
-    [SerializeField] private uint _drive;
+    public uint _grade;
+    public uint _atk;
+
+    [ReadOnly] public uint _def;
+    [ReadOnly] public uint _crit;
+    [ReadOnly] public uint _drive;
 }
 
 
-public class BaseCard : MonoBehaviour {
-
+public class BaseCard : MonoBehaviour
+{
     // Use this for initialization
     void Start()
     {
         _nation = GetNationFromClan(_clan);
-
+        _currentStats._crit = 1;
+        _currentStats._drive = GetDriveFromGrade(_currentStats._grade);
+        _currentStats._def = GetDefenseFromGrade(_currentStats._grade);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Flip();
+     
     }
 
     #region Enum
@@ -115,16 +118,16 @@ public class BaseCard : MonoBehaviour {
 
     //Function
 
-    public void Activate()
-    {
+    //public void Activate()
+    //{
 
-    }
+    //}
 
 
-    public void Show()
-    {
+    //public void Show()
+    //{
 
-    }
+    //}
 
     public void Flip()
     {
@@ -133,9 +136,11 @@ public class BaseCard : MonoBehaviour {
 
     #region Getter/Setter
 
+    public void SetCurrentZone(BaseZone.ZONE zone)
+    {
+        _currentZone = zone;
+    }
 
-    #endregion
-    
     private UNIT_NATION GetNationFromClan(UNIT_CLAN clan)
     {
         if (clan <= UNIT_CLAN.NO_CLAN || clan >= UNIT_CLAN.CLAN_NB)
@@ -161,6 +166,29 @@ public class BaseCard : MonoBehaviour {
 
         return UNIT_NATION.MAGALLANICA;
     }
+    private uint GetDriveFromGrade(uint grade)
+    {
+        if (grade == 4)
+            return 3;
+        if (grade == 3)
+            return 2;
+
+        return 1;
+    }
+    private uint GetDefenseFromGrade(uint grade)
+    {
+        //Check Trigger -> 5000 for draw trigger
+        if (grade == 0)
+            return 10000;
+        if (grade == 1 || grade == 2)
+            return 5000;
+        if (grade >= 3)
+            return 0;
+
+        return 1;
+    }
+    #endregion
+
 
     //Variable
 
@@ -170,13 +198,11 @@ public class BaseCard : MonoBehaviour {
     [SerializeField] private UNIT_TYPE _type;
     [SerializeField] private UNIT_CLAN _clan;
     private UNIT_NATION _nation;
+    private BaseZone.ZONE _currentZone;
 
     //Status
     bool _stand;
-    bool _legion;
     // bool etc...;
-
-  //  private UNIT_PLACE
   }
 
 
