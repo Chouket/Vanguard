@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Deck : PileZone {
+public class Deck : BasePile {
 
 	// Use this for initialization
 	void Start ()
@@ -32,16 +32,12 @@ public class Deck : PileZone {
         return cardToDraw;
     }
 
-    //Top of the deck is the end of the card Array
-    public void PutOnTop(BaseCard card)
-    {
-        AddCard(card);
-        UpdateCardPosition();
-    }
-
     //Bottom of the deck is the beginning of the card Array
     public void PutOnBottom(BaseCard card)
     {
+        if (!card)
+            return;
+
         _cards.Insert(0, card);
         UpdateCardCurrentZone(card);
         UpdateCardPosition();
@@ -73,13 +69,15 @@ public class Deck : PileZone {
         UpdateCardPosition();
     }
 
-    private void UpdateCardPosition()
+    protected override void UpdateCardPosition()
     {
         Vector3 pos = transform.position;
         int cardNb = _cards.Count;
+        Vector3 offset = Vector3.back * 0.01f;
+
         for (int idx = 0; idx < cardNb; idx++)
         {
-            _cards[idx].transform.position = pos + (0.01f * idx * Vector3.back);
+            _cards[idx].transform.position = pos + offset * idx;
         }
     }
 

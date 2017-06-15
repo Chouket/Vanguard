@@ -16,6 +16,7 @@ public class Player : MonoBehaviour {
         if (count == 300)
         {
             Draw();
+            TakeDamage();
             count = 0;
         }
 	}
@@ -29,7 +30,23 @@ public class Player : MonoBehaviour {
         _hand.AddCard(cardDrawn);
     }
 
+    public void Discard()
+    {
+        //Select a Card
+        BaseCard cardToDiscard = _hand.GetRandomCard();
+        _hand.RemoveCard(cardToDiscard);
+        _dropZone.AddCard(cardToDiscard);
+    }
+
+    public void TakeDamage()
+    {
+        BaseCard cardChecked = _deck.Draw();
+        _damageZone.AddCard(cardChecked);
+    }
+
 
     [SerializeField] private Deck _deck;
     [SerializeField] private Hand _hand;
+    [SerializeField] private DropZone _dropZone;
+    [SerializeField] private DamageZone _damageZone;
 }

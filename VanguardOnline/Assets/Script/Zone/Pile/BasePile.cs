@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
-public abstract class PileZone : BaseZone {
+public abstract class BasePile : BaseZone {
 
 	// Use this for initialization
 	void Start () {
@@ -14,16 +15,26 @@ public abstract class PileZone : BaseZone {
 	
 	}
 
-    public virtual void AddCard(BaseCard card)
+    public override void AddCard(BaseCard card)
     {
+        if (!card)
+            return;
+
         _cards.Add(card);
         UpdateCardCurrentZone(card);
+        UpdateCardPosition();
     }
 
-    public void RemoveCard(BaseCard card)
+    public override void RemoveCard(BaseCard card)
     {
+        if (!card)
+            return;
+
         _cards.Remove(card);
+        UpdateCardPosition();
     }
+
+    protected override abstract void UpdateCardPosition();
 
     protected override abstract void UpdateCardCurrentZone(BaseCard card);
 

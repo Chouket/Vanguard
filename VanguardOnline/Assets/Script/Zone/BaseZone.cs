@@ -9,6 +9,7 @@ public abstract class BaseZone : MonoBehaviour
         NONE = 0,
         DECK,
         HAND,
+        DAMAGE,
         DROP,
         SOUL,
         BIND,
@@ -30,6 +31,11 @@ public abstract class BaseZone : MonoBehaviour
 	
 	}
 
+    public abstract void AddCard(BaseCard card);
 
-    protected abstract void UpdateCardCurrentZone(BaseCard card);
+    public abstract void RemoveCard(BaseCard card);
+
+    protected abstract void UpdateCardPosition() /*= 0*/;
+
+    protected abstract void UpdateCardCurrentZone(BaseCard card) /*= 0*/;
 }

@@ -2,7 +2,7 @@
 using System.Collections;
 
 
-public class Hand : PileZone {
+public class Hand : BasePile {
 
     void Start ()
     {
@@ -12,25 +12,16 @@ public class Hand : PileZone {
 	
 	void Update ()
     {
-       // Shuffle();
+       
     }
 
-    public override void AddCard(BaseCard card)
+    public BaseCard GetRandomCard()
     {
-        if (!card)
-            return;
-
-        base.AddCard(card);
-        UpdateCardPosition();
+        int rand = Random.Range(0, _cards.Count - 1);
+        return _cards[rand];
     }
 
-    public void Discard(BaseCard card)
-    {
-        RemoveCard(card);
-        UpdateCardPosition();
-    }
-
-    void Shuffle()
+    public void Shuffle()
     {
         int cardNb = _cards.Count;
         for (int id = 0; id < cardNb; id++)
@@ -44,7 +35,7 @@ public class Hand : PileZone {
         UpdateCardPosition();
     }
 
-    void UpdateCardPosition()
+    protected override void UpdateCardPosition()
     {
         Vector3 left = transform.position - Vector3.right * (_handGraphicSize / 2f);
         Vector3 right = transform.position - Vector3.left * (_handGraphicSize / 2f);
