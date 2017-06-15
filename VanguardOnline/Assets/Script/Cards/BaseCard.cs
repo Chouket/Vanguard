@@ -31,7 +31,7 @@ public class BaseCard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-     
+
     }
 
     #region Enum
@@ -117,6 +117,11 @@ public class BaseCard : MonoBehaviour
     #endregion
 
     //Function
+
+    public void CardSelect()
+    {
+        Debug.Log("Card: " + name + " has been select");
+    }
 
     //public void Activate()
     //{
