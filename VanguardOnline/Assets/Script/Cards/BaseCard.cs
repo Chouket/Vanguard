@@ -141,6 +141,11 @@ public class BaseCard : MonoBehaviour
 
     #region Getter/Setter
 
+    public string GetName()
+    {
+        return _currentStats._name;
+    }
+
     public void SetCurrentZone(BaseZone.ZONE zone)
     {
         _currentZone = zone;

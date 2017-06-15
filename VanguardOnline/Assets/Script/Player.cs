@@ -4,22 +4,32 @@ using System.Collections;
 public class Player : MonoBehaviour {
 
 	// Use this for initialization
-	void Start () {
-	
+	void Start ()
+    {
+ 
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
+	void Update ()
+    {
+        count++;
+        if (count == 300)
+        {
+            Draw();
+            count = 0;
+        }
 	}
 
-    // here ?
-    void Draw()
-    {
+   static int count = 0;
 
+    // here ?
+    public void Draw()
+    {
+        BaseCard cardDrawn = _deck.Draw();
+        _hand.AddCard(cardDrawn);
     }
 
 
-    Deck _deck;
-    Hand _hand;
+    [SerializeField] private Deck _deck;
+    [SerializeField] private Hand _hand;
 }
