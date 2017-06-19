@@ -4,8 +4,9 @@ using System.Collections;
 
 public class Hand : BasePile {
 
-    void Start ()
+    new void Start()
     {
+        base.Start();
         Shuffle();
     }
 	
@@ -37,18 +38,22 @@ public class Hand : BasePile {
 
     protected override void UpdateCardPosition()
     {
+        Quaternion rot = transform.rotation;
         Vector3 left = transform.position - Vector3.right * (_handGraphicSize / 2f);
         Vector3 right = transform.position - Vector3.left * (_handGraphicSize / 2f);
         Vector3 delta = right - left;
 
         int cardNb = _cards.Count;
         float gapsNb = cardNb - 1;
-        Vector3 gap = delta / gapsNb;
+        Vector3 offset = 0.01f * Vector3.back;
+
+        Vector3 gap = (gapsNb != 0) ? delta / gapsNb + offset : delta;
+
 
         for (int idx = 0; idx < cardNb; idx++)
         {
-            Vector3 lisibilityOffset = idx * 0.01f * Vector3.forward;
-            _cards[idx].transform.position = left + (gap * idx) + lisibilityOffset;
+            _cards[idx].transform.position = left + (gap * idx);
+            _cards[idx].transform.rotation = rot;
         }
     }
 

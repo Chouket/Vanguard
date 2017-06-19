@@ -6,9 +6,13 @@ using System;
 public abstract class BasePile : BaseZone {
 
 	// Use this for initialization
-	void Start () {
-	
-	}
+	protected void Start ()
+    {
+        foreach (BaseCard card in _cards)
+        {
+            UpdateCardCurrentZone(card);
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -38,6 +42,6 @@ public abstract class BasePile : BaseZone {
 
     protected override abstract void UpdateCardCurrentZone(BaseCard card);
 
-    [SerializeField] //to remove
-     protected List<BaseCard> _cards;
+    //Members
+    [SerializeField] protected List<BaseCard> _cards;
 }
