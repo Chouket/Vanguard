@@ -2,7 +2,8 @@
 using System.Collections;
 
 
-public class Hand : BasePile {
+public class Hand : BasePile
+{
 
     new void Start()
     {
