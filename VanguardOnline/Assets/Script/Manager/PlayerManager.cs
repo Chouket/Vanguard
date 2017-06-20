@@ -9,14 +9,19 @@ public class PlayerManager : MonoBehaviour {
         get
         {
             if (instance == null)
-                instance = new PlayerManager();
+            {
+                GameObject obj = Instantiate(Resources.Load("Prefabs/Manager/PlayerManager")) as GameObject;
+                instance = obj.GetComponent<PlayerManager>();
+            }
             return instance;
         }
     }
 
 	void Start ()
     {
-        instance = this;
+        //Change When 2 player got there !
+        _player = FindObjectOfType<Player>();
+        //Debug.Log("PLayer Manager got player :" + _player.name);
 	}
 	
     

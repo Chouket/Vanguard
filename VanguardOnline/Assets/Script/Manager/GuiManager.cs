@@ -9,7 +9,10 @@ public class GuiManager : MonoBehaviour
         get
         {
             if (instance == null)
-                instance = new GuiManager();
+            {
+                GameObject obj = Instantiate(Resources.Load("Prefabs/Manager/GuiManager")) as GameObject;
+                instance = obj.GetComponent<GuiManager>();
+            }
             return instance;
         }
     }
