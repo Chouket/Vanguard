@@ -16,9 +16,13 @@ public class PlayerManager : MonoBehaviour {
 
 	void Start ()
     {
+        instance = this;
 	}
 	
+    
 	void Update ()
     {
 	}
+
+    public Player _player;
 }

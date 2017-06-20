@@ -121,6 +121,8 @@ public class BaseCard : MonoBehaviour
     public void CardSelect()
     {
         Debug.Log("Card: " + name + " has been select");
+        if (_currentZone == BaseZone.ZONE.HAND)
+            PlayerManager.Instance._player.Ride(this);
     }
 
     //public void Activate()
@@ -199,6 +201,10 @@ public class BaseCard : MonoBehaviour
     }
     #endregion
 
+    void OnTriggerEnter(Collider other)
+    {
+        print("Collide !");
+    }
 
     //Variable
 

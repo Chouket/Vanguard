@@ -4,9 +4,10 @@ using System.Collections.Generic;
 
 public class Deck : BasePile {
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    new void Start()
     {
+        base.Start();
         Shuffle();
     }
 	
@@ -69,15 +70,18 @@ public class Deck : BasePile {
         UpdateCardPosition();
     }
 
+
     protected override void UpdateCardPosition()
     {
         Vector3 pos = transform.position;
+        Quaternion rot = transform.rotation;
         int cardNb = _cards.Count;
         Vector3 offset = Vector3.back * 0.01f;
 
         for (int idx = 0; idx < cardNb; idx++)
         {
             _cards[idx].transform.position = pos + offset * idx;
+            _cards[idx].transform.rotation = rot;
         }
     }
 

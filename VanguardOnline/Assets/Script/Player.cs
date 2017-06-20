@@ -13,15 +13,20 @@ public class Player : MonoBehaviour {
 	void Update ()
     {
         count++;
-        if (count == 300)
+        if (count == 150)
         {
-            Draw();
-            TakeDamage();
+           // Draw();
+            //TakeDamage();
             count = 0;
         }
 	}
 
    static int count = 0;
+
+    public void CardSelected(BaseCard cardSelected)
+    {
+        Discard();
+    }
 
     // here ?
     public void Draw()
@@ -41,10 +46,40 @@ public class Player : MonoBehaviour {
     public void TakeDamage()
     {
         BaseCard cardChecked = _deck.Draw();
+
         _damageZone.AddCard(cardChecked);
     }
 
+    public void Ride(BaseCard card)
+    {
+        Debug.Log("Ride !");
+        _hand.RemoveCard(card);
+        _vanguardCircle.Ride(card);
+    }
 
+    public void Call(BaseCard card)
+    {
+        StartCoroutine(WaitForCircle());
+        _hand.RemoveCard(card);
+        _selectedCircle.AddCard(card);
+    }
+
+
+    private IEnumerator WaitForCircle()
+    {
+        Debug.Log("Waiting for Circle !");
+        yield return new WaitUntil(() => _selectedCircle != null);
+    }
+
+
+    //MEMBERS
+    //Circle
+    [SerializeField] private VanguardCircle _vanguardCircle;
+
+
+
+    private BaseZone _selectedCircle;
+    //Zone
     [SerializeField] private Deck _deck;
     [SerializeField] private Hand _hand;
     [SerializeField] private DropZone _dropZone;
