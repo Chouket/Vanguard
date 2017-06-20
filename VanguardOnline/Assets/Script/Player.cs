@@ -46,7 +46,6 @@ public class Player : MonoBehaviour {
     public void TakeDamage()
     {
         BaseCard cardChecked = _deck.Draw();
-
         _damageZone.AddCard(cardChecked);
     }
 

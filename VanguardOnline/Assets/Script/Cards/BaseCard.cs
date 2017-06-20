@@ -31,7 +31,7 @@ public class BaseCard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     #region Enum
@@ -120,9 +120,7 @@ public class BaseCard : MonoBehaviour
 
     public void CardSelect()
     {
-        Debug.Log("Card: " + name + " has been select");
-        if (_currentZone == BaseZone.ZONE.HAND)
-            PlayerManager.Instance._player.Ride(this);
+
     }
 
     //public void Activate()
@@ -201,9 +199,13 @@ public class BaseCard : MonoBehaviour
     }
     #endregion
 
-    void OnTriggerEnter(Collider other)
+    void OnMouseDown()
     {
-        print("Collide !");
+        Debug.Log("Click on card : " + name);
+        if (_currentZone == BaseZone.ZONE.HAND)
+            PlayerManager.Instance._player.Ride(this);
+        else if (_currentZone == BaseZone.ZONE.DECK)
+            PlayerManager.Instance._player.TakeDamage();
     }
 
     //Variable
