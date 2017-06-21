@@ -18,7 +18,10 @@ public class CardInspectorUI : MonoBehaviour {
 
     public void CardToDisplay(BaseCard card)
     {
-        _cardText.text = card.CurrentStats._name;
+        _cardName.text = card.CurrentStats._name;
+        SpriteRenderer cardSprite = card.transform.GetChild(0).GetComponent<SpriteRenderer>();
+        _cardPicture.texture = cardSprite.sprite.texture;
+
     }
 
     private RawImage _cardPicture = null;
