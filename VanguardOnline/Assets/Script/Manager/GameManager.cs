@@ -23,12 +23,12 @@ public class GameManager : MonoBehaviour {
 
     void Start ()
     {
-        //_stepManager = StepManager.Instance;
-        //_playerManager = PlayerManager.Instance;
-        //_networkManager = NetworkManager.Instance;
-        //_guiManager = GuiManager.Instance;
-        //_cardManager = Cardmanager.Instance;
-        //_inputManager = InputManager.Instance;
+        _playerManager = PlayerManager.Instance;
+        _stepManager = StepManager.Instance;
+        _inputManager = InputManager.Instance;
+        _guiManager = GuiManager.Instance;
+       // _networkManager = NetworkManager.Instance;
+       // _cardManager = Cardmanager.Instance;
     }
 	
 	void Update ()

@@ -9,7 +9,10 @@ public class StepManager : MonoBehaviour
         get
         {
             if (instance == null)
-                instance = new StepManager();
+            {
+                GameObject obj = Instantiate(Resources.Load("Prefabs/Manager/StepManager")) as GameObject;
+                instance = obj.GetComponent<StepManager>();
+            }
             return instance;
         }
     }
