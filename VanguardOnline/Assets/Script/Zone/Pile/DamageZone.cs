@@ -10,10 +10,28 @@ public class DamageZone : BasePile {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
 	
 	}
 
+    public int GetDamageCount()
+    {
+        return _cards.Count;
+    }
+   
+    public int GetFaceUpCount()
+    {
+        int faceUpNb = 0;
+
+        int cardNb = _cards.Count;
+        for (int idx = 0; idx < cardNb; idx++)
+        {
+            //if (_cards[idx].isFlip)
+                faceUpNb++;
+        }
+        return faceUpNb;
+    }        
 
     protected override void UpdateCardPosition()
     {

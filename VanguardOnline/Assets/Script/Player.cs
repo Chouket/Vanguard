@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 
+    const int MAX_LIFE_POINT = 6;
+
 	// Use this for initialization
 	void Start ()
     {
@@ -43,12 +45,6 @@ public class Player : MonoBehaviour {
         _dropZone.AddCard(cardToDiscard);
     }
 
-    public void TakeDamage()
-    {
-        BaseCard cardChecked = _deck.Draw();
-        _damageZone.AddCard(cardChecked);
-    }
-
     public void Ride(BaseCard card)
     {
         Debug.Log("Ride !");
@@ -63,6 +59,22 @@ public class Player : MonoBehaviour {
         _selectedCircle.AddCard(card);
     }
 
+    public void TakeDamage()
+    {
+        if (_damageZone.GetDamageCount() == MAX_LIFE_POINT)
+        {
+            Loose();
+            return;
+        }
+
+        BaseCard cardChecked = _deck.Draw();
+        _damageZone.AddCard(cardChecked);
+    }
+
+    private void Loose()
+    {
+        Debug.Log("YOU LOOSE !");
+    } 
 
     private IEnumerator WaitForCircle()
     {
@@ -74,7 +86,12 @@ public class Player : MonoBehaviour {
     //MEMBERS
     //Circle
     [SerializeField] private VanguardCircle _vanguardCircle;
+    [SerializeField] private RearguardCircle _topLeftRearguardCircle;
+    [SerializeField] private RearguardCircle _topRightRearguardCircle;
 
+    [SerializeField] private RearguardCircle _botLeftRearguardCircle;
+    [SerializeField] private RearguardCircle _botCenterRearguardCircle;
+    [SerializeField] private RearguardCircle _botRightRearguardCircle;
 
 
     private BaseZone _selectedCircle;
