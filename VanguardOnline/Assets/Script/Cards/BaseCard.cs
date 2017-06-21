@@ -11,6 +11,8 @@ public class CardStats
     public uint _grade;
     public uint _atk;
 
+    //[ReadOnly] public enum Power -> Boost / Intercept / Double Drive 
+
     [ReadOnly] public uint _def;
     [ReadOnly] public uint _crit;
     [ReadOnly] public uint _drive;
