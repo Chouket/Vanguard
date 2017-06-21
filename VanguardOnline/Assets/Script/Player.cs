@@ -13,16 +13,9 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        count++;
-        if (count == 150)
-        {
-           // Draw();
-            //TakeDamage();
-            count = 0;
-        }
+        if (Input.GetMouseButtonDown(1) && _lastCallCoroutine != null)
+            StopCoroutine(_lastCallCoroutine);
 	}
-
-   static int count = 0;
 
     public void CardSelected(BaseCard cardSelected)
     {
@@ -41,21 +34,24 @@ public class Player : MonoBehaviour {
         //Select a Card
         BaseCard cardToDiscard = _hand.GetRandomCard();
         _hand.RemoveCard(cardToDiscard);
-        _dropZone.AddCard(cardToDiscard);
+        SendToDropZone(cardToDiscard);
+    }
+
+    public void SendToDropZone(BaseCard card)
+    {
+        _dropZone.AddCard(card);
     }
 
     public void Ride(BaseCard card)
     {
         Debug.Log("Ride !");
         _hand.RemoveCard(card);
-        _vanguardCircle.Ride(card);
+        _vanguardCircle.AddCard(card);
     }
 
     public void Call(BaseCard card)
     {
-        StartCoroutine(WaitForCircle());
-        _hand.RemoveCard(card);
-        _selectedCircle.AddCard(card);
+        _lastCallCoroutine = StartCoroutine(CallFromHand(card));   
     }
 
     public void TakeDamage()
@@ -75,12 +71,18 @@ public class Player : MonoBehaviour {
         Debug.Log("YOU LOOSE !");
     } 
 
-    private IEnumerator WaitForCircle()
+    private IEnumerator CallFromHand(BaseCard card)
     {
         Debug.Log("Waiting for Circle !");
         yield return new WaitUntil(() => _selectedCircle != null);
+        _hand.RemoveCard(card);
+        _selectedCircle.AddCard(card);
+        _selectedCircle = null;
+        _lastCallCoroutine = null;
     }
 
+    Coroutine _lastCallCoroutine = null;
+    [HideInInspector] public BaseZone _selectedCircle;
 
     //MEMBERS
     //Circle
@@ -92,8 +94,6 @@ public class Player : MonoBehaviour {
     [SerializeField] private RearguardCircle _botCenterRearguardCircle;
     [SerializeField] private RearguardCircle _botRightRearguardCircle;
 
-
-    private BaseZone _selectedCircle;
     //Zone
     [SerializeField] private Deck _deck;
     [SerializeField] private Hand _hand;
