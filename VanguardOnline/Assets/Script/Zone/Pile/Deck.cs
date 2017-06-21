@@ -88,6 +88,7 @@ public class Deck : BasePile {
     protected override void UpdateCardCurrentZone(BaseCard card) 
     {
         card.SetCurrentZone(ZONE.DECK);
+        card.IsFlip = true;
     }
 
 }

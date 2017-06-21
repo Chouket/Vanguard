@@ -62,6 +62,7 @@ public class Hand : BasePile
     protected override void UpdateCardCurrentZone(BaseCard card) 
     {
         card.SetCurrentZone(ZONE.HAND);
+        card.IsFlip = false;
     }
 
     [SerializeField] private GameObject _leftAnchor;
