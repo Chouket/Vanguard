@@ -21,6 +21,8 @@ public class CardInspectorUI : MonoBehaviour {
         _cardName.text = card.CurrentStats._name;
         SpriteRenderer cardSprite = card.transform.GetChild(0).GetComponent<SpriteRenderer>();
         _cardPicture.texture = cardSprite.sprite.texture;
+        _cardInfo.text = "ATK: " + card.CurrentStats._atk + " | DEF: " + card.CurrentStats._def +
+            "\nGrade: " + card.CurrentStats._grade + " | Drive: " + card.CurrentStats._drive;
 
     }
 

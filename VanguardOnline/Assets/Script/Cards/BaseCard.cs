@@ -227,6 +227,7 @@ public class BaseCard : MonoBehaviour
     [SerializeField] private CardStats _currentStats;
     public CardStats CurrentStats { get { return _currentStats; } }
     private CardStats _buffedStats;
+    public CardStats BuffedStats { get { return _buffedStats; } }
 
     [SerializeField] private UNIT_TYPE _type;
     [SerializeField] private UNIT_CLAN _clan;
