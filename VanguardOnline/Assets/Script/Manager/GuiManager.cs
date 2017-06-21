@@ -17,7 +17,7 @@ public class GuiManager : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-	
+        instance = this;
 	}
 	
 	// Update is called once per frame
@@ -25,4 +25,6 @@ public class GuiManager : MonoBehaviour
     {
 	
 	}
+
+    public CardInspectorUI _cardInspectorUI = null;
 }

@@ -60,6 +60,7 @@ public class Hand : BasePile {
     protected override void UpdateCardCurrentZone(BaseCard card) 
     {
         card.SetCurrentZone(ZONE.HAND);
+        card.IsFlip = false;
     }
 
     const float _handGraphicSize = 5f;

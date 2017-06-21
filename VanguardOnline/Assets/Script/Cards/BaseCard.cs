@@ -22,6 +22,7 @@ public class BaseCard : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        Flip();
         _nation = GetNationFromClan(_clan);
         _currentStats._crit = 1;
         _currentStats._drive = GetDriveFromGrade(_currentStats._grade);
@@ -32,6 +33,14 @@ public class BaseCard : MonoBehaviour
     void Update()
     {
 
+    }
+
+    void OnMouseEnter()
+    {
+        if (_currentZone == BaseZone.ZONE.BIND || _currentZone == BaseZone.ZONE.DAMAGE ||
+            _currentZone == BaseZone.ZONE.HAND || _currentZone == BaseZone.ZONE.REARGUARD ||
+            _currentZone == BaseZone.ZONE.VANGUARD)
+            GuiManager.Instance._cardInspectorUI.CardToDisplay(this);
     }
 
     #region Enum
@@ -138,7 +147,10 @@ public class BaseCard : MonoBehaviour
 
     public void Flip()
     {
-        transform.Rotate(Vector3.up, 180.0f);
+        if (IsFlip)
+            transform.Rotate(Vector3.up, 180.0f);
+        else
+            transform.Rotate(Vector3.up, 0f);
     }
 
     #region Getter/Setter
@@ -217,7 +229,10 @@ public class BaseCard : MonoBehaviour
     private BaseZone.ZONE _currentZone;
 
     //Status
-    bool _stand;
+    private bool _isStand;
+    public bool IsStand { get { return _isStand; } set { _isStand = value; } }
+    private bool _isFlip = false;
+    public bool IsFlip { get{return _isFlip;} set{_isFlip = value; Flip(); } }
     // bool etc...;
   }
 
