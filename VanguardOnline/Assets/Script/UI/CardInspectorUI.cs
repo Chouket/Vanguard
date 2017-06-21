@@ -18,7 +18,7 @@ public class CardInspectorUI : MonoBehaviour {
 
     public void CardToDisplay(BaseCard card)
     {
-        _cardText.text = card.name;
+        _cardText.text = card.CurrentStats._name;
     }
 
     private RawImage _cardPicture = null;
