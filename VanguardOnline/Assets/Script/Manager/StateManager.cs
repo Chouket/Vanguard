@@ -1,17 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class StepManager : MonoBehaviour
+public class StateManager : MonoBehaviour
 {
-    static private StepManager instance = null;
-    static public StepManager Instance
+    static private StateManager instance = null;
+    static public StateManager Instance
     {
         get
         {
             if (instance == null)
             {
                 GameObject obj = Instantiate(Resources.Load("Prefabs/Manager/StepManager")) as GameObject;
-                instance = obj.GetComponent<StepManager>();
+                instance = obj.GetComponent<StateManager>();
             }
             return instance;
         }

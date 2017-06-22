@@ -54,6 +54,12 @@ public class Player : MonoBehaviour {
         _lastCallCoroutine = StartCoroutine(CallFromHand(card));   
     }
 
+    public void Guard(BaseCard card)
+    {
+        _hand.RemoveCard(card);
+        _guardianCircle.AddCard(card);
+    }
+
     public void TakeDamage()
     {
         if (_damageZone.GetDamageCount() == MAX_LIFE_POINT)
@@ -86,13 +92,16 @@ public class Player : MonoBehaviour {
 
     //MEMBERS
     //Circle
+    //FrontRow
     [SerializeField] private VanguardCircle _vanguardCircle;
     [SerializeField] private RearguardCircle _topLeftRearguardCircle;
     [SerializeField] private RearguardCircle _topRightRearguardCircle;
-
+    //BackRow
     [SerializeField] private RearguardCircle _botLeftRearguardCircle;
     [SerializeField] private RearguardCircle _botCenterRearguardCircle;
     [SerializeField] private RearguardCircle _botRightRearguardCircle;
+
+    [SerializeField] private GuardianCircle _guardianCircle;
 
     //Zone
     [SerializeField] private Deck _deck;

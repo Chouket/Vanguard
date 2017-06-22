@@ -21,17 +21,15 @@ public class CardStats
 
 public class BaseCard : MonoBehaviour
 {
-    // Use this for initialization
+    // Unity Func
     void Start()
     {
-        Flip();
         _nation = GetNationFromClan(_clan);
         _currentStats._crit = 1;
         _currentStats._drive = GetDriveFromGrade(_currentStats._grade);
         _currentStats._def = GetDefenseFromGrade(_currentStats._grade);
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -40,8 +38,20 @@ public class BaseCard : MonoBehaviour
     void OnMouseEnter()
     {
         if (_currentZone == BaseZone.ZONE.DAMAGE || _currentZone == BaseZone.ZONE.HAND ||
-            _currentZone == BaseZone.ZONE.REARGUARD || _currentZone == BaseZone.ZONE.VANGUARD)
+            _currentZone == BaseZone.ZONE.REARGUARD || _currentZone == BaseZone.ZONE.VANGUARD ||
+            _currentZone == BaseZone.ZONE.GUARDIAN)
             GuiManager.Instance._cardInspectorUI.CardToDisplay(this);
+    }
+
+    void OnMouseDown()
+    {
+        Debug.Log("Click on card : " + name);
+
+        if (_currentZone == BaseZone.ZONE.HAND)
+            PlayerManager.Instance._player.Guard(this);
+
+        else if (_currentZone == BaseZone.ZONE.DECK)
+            PlayerManager.Instance._player.TakeDamage();
     }
 
     #region Enum
@@ -128,28 +138,14 @@ public class BaseCard : MonoBehaviour
 
     //Function
 
-    public void CardSelect()
-    {
-
-    }
-
-    //public void Activate()
-    //{
-
-    //}
-
-
-    //public void Show()
-    //{
-
-    //}
-
     public void Flip()
     {
         if (IsFlip)
-            transform.Rotate(Vector3.up, 180.0f);
+            transform.rotation = Quaternion.identity;
         else
-            transform.Rotate(Vector3.up, 0f);
+            transform.Rotate(Vector3.up, 180f);
+
+        _isFlip = !_isFlip;
     }
 
     #region Getter/Setter
@@ -158,11 +154,13 @@ public class BaseCard : MonoBehaviour
     {
         return _currentStats._name;
     }
-
     public void SetCurrentZone(BaseZone.ZONE zone)
     {
         _currentZone = zone;
     }
+
+    public CardStats CurrentStats { get { return _currentStats; } }
+    public CardStats BuffedStats { get { return _buffedStats; } }
 
     private UNIT_NATION GetNationFromClan(UNIT_CLAN clan)
     {
@@ -210,24 +208,15 @@ public class BaseCard : MonoBehaviour
 
         return 1;
     }
-    #endregion
 
-    void OnMouseDown()
-    {
-        Debug.Log("Click on card : " + name);
-        if (_currentZone == BaseZone.ZONE.HAND)
-            PlayerManager.Instance._player.Call(this);
-        //PlayerManager.Instance._player.Ride(this);
-        else if (_currentZone == BaseZone.ZONE.DECK)
-            PlayerManager.Instance._player.TakeDamage();
-    }
+    public bool IsStand { get { return _isStand; } set { _isStand = value; } }
+    public bool IsFlip { get { return _isFlip; } }
+    #endregion
 
     //Variable
 
     [SerializeField] private CardStats _currentStats;
-    public CardStats CurrentStats { get { return _currentStats; } }
     private CardStats _buffedStats;
-    public CardStats BuffedStats { get { return _buffedStats; } }
 
     [SerializeField] private UNIT_TYPE _type;
     [SerializeField] private UNIT_CLAN _clan;
@@ -236,9 +225,7 @@ public class BaseCard : MonoBehaviour
 
     //Status
     private bool _isStand;
-    public bool IsStand { get { return _isStand; } set { _isStand = value; } }
     private bool _isFlip = false;
-    public bool IsFlip { get{return _isFlip;} set{_isFlip = value; Flip(); } }
     // bool etc...;
   }
 

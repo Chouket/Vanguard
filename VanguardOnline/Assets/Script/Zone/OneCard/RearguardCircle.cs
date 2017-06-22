@@ -15,7 +15,6 @@ public class RearguardCircle : BaseOneCard {
 	
 	}
 
-
     void OnMouseDown()
     {
         Debug.Log("Click on Rear Circle : " + name);
@@ -24,10 +23,8 @@ public class RearguardCircle : BaseOneCard {
 
     public override void AddCard(BaseCard card)
     {
-        Debug.Log("AddToRear : " + card.name);
         if (_card)
         {
-            Debug.Log("Removing other : " + _card.name);
             BaseCard cardRemoved = _card;
             RemoveCard(_card);
             PlayerManager.Instance._player.SendToDropZone(cardRemoved);

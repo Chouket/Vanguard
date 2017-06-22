@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    private StepManager _stepManager = null;
+    private StateManager _stepManager = null;
     private PlayerManager _playerManager = null;
     private NetworkManager _networkManager = null;
     private GuiManager _guiManager = null;
@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour {
     void Start ()
     {
         _playerManager = PlayerManager.Instance;
-        _stepManager = StepManager.Instance;
+        _stepManager = StateManager.Instance;
         _inputManager = InputManager.Instance;
         _guiManager = GuiManager.Instance;
        // _networkManager = NetworkManager.Instance;
