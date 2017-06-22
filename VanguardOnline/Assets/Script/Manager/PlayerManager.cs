@@ -19,15 +19,17 @@ public class PlayerManager : MonoBehaviour {
 
 	void Start ()
     {
-        //Change When 2 player got there !
         _player = FindObjectOfType<Player>();
-        //Debug.Log("PLayer Manager got player :" + _player.name);
 	}
 	
     
 	void Update ()
     {
 	}
+
+    public void tmpAddCardInPlayerHand()
+    {
+    }
 
     public Player _player;
 }

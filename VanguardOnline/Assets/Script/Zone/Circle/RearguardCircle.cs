@@ -3,13 +3,11 @@ using System.Collections;
 
 public class RearguardCircle : BaseOneCard {
 
-	// Use this for initialization
 	new void Start ()
     {
         base.Start();
 	}
 	
-	// Update is called once per frame
 	void Update ()
     {
 	
@@ -20,6 +18,12 @@ public class RearguardCircle : BaseOneCard {
     {
         Debug.Log("Click on Rear Circle : " + name);
         PlayerManager.Instance._player._selectedCircle = this;
+    }
+
+    void OnMouseEnter()
+    {
+        if (_card)
+            GuiManager.Instance._cardInspectorUI.CardToDisplay(_card);
     }
 
     public override void AddCard(BaseCard card)
@@ -34,6 +38,13 @@ public class RearguardCircle : BaseOneCard {
         }
 
         base.AddCard(card);
+        _card.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+    }
+
+    public override void RemoveCard(BaseCard card)
+    {
+        _card.gameObject.GetComponent<BoxCollider2D>().enabled = true;
+        base.RemoveCard(card);
     }
 
     protected override void UpdateCardPosition()
