@@ -39,9 +39,8 @@ public class BaseCard : MonoBehaviour
 
     void OnMouseEnter()
     {
-        if (_currentZone == BaseZone.ZONE.BIND || _currentZone == BaseZone.ZONE.DAMAGE ||
-            _currentZone == BaseZone.ZONE.HAND || _currentZone == BaseZone.ZONE.REARGUARD ||
-            _currentZone == BaseZone.ZONE.VANGUARD)
+        if (_currentZone == BaseZone.ZONE.DAMAGE || _currentZone == BaseZone.ZONE.HAND ||
+            _currentZone == BaseZone.ZONE.REARGUARD || _currentZone == BaseZone.ZONE.VANGUARD)
             GuiManager.Instance._cardInspectorUI.CardToDisplay(this);
     }
 
@@ -217,7 +216,8 @@ public class BaseCard : MonoBehaviour
     {
         Debug.Log("Click on card : " + name);
         if (_currentZone == BaseZone.ZONE.HAND)
-            PlayerManager.Instance._player.Ride(this);
+            PlayerManager.Instance._player.Call(this);
+        //PlayerManager.Instance._player.Ride(this);
         else if (_currentZone == BaseZone.ZONE.DECK)
             PlayerManager.Instance._player.TakeDamage();
     }

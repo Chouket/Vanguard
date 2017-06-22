@@ -16,10 +16,15 @@ public class VanguardCircle : BaseOneCard
 
     }
 
-    public void Ride(BaseCard card)
+    public override void AddCard(BaseCard card)
     {
-        AddToSoul(card);
-        AddCard(card);
+        if (_card)
+        {
+            RemoveCard(_card);
+            _soul.AddCard(_card);
+        }
+
+        base.AddCard(card);
     }
 
     public void AddToSoul(BaseCard card)
