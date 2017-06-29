@@ -96,6 +96,7 @@ public class Player : MonoBehaviour {
 
     //Zone
     [SerializeField] private Deck _deck;
+    public Deck Deck { get { return _deck; } }
     [SerializeField] private Hand _hand;
     [SerializeField] private DropZone _dropZone;
     [SerializeField] private DamageZone _damageZone;

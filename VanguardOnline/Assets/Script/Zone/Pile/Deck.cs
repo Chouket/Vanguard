@@ -7,6 +7,7 @@ public class Deck : BasePile {
     // Use this for initialization
     new void Start()
     {
+        if (_cards != null)
         base.Start();
         Shuffle();
     }
@@ -15,6 +16,13 @@ public class Deck : BasePile {
 	void Update ()
     {
        
+    }
+
+    // Add List<BaseCard> to Deck
+    public void AddDeck(List<BaseCard> deck)
+    {
+        _cards = deck;
+        Start();
     }
 
     //Remove Top card and return it

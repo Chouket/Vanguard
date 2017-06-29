@@ -43,5 +43,5 @@ public abstract class BasePile : BaseZone {
     protected override abstract void UpdateCardCurrentZone(BaseCard card);
 
     //Members
-    [SerializeField] protected List<BaseCard> _cards;
+    [SerializeField] protected List<BaseCard> _cards = null;
 }

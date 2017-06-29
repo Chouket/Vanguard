@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerManager : MonoBehaviour {
 
@@ -17,9 +18,15 @@ public class PlayerManager : MonoBehaviour {
         }
     }
 
+    public CardsCollection tmpDeck = null;
+
 	void Start ()
     {
         _player = FindObjectOfType<Player>();
+        string path = Application.dataPath + "/CardsInfos/JsonCards/ShadowPaladin.json";
+        tmpDeck = transform.GetComponent<JsonParser>().LoadJson(path);
+        List<BaseCard> cards = transform.GetComponent<JsonParser>().JsonCardsToBaseCard(tmpDeck);
+        _player.Deck.AddDeck(cards);
 	}
 	
     

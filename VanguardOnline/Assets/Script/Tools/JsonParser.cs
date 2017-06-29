@@ -12,10 +12,10 @@ public class CardsCollection
 [System.Serializable]
 public class JsonCards
 {
-    public int CardID;
+    public uint CardID;
     public string Name;
-    public int Grade;
-    public int ATK;
+    public uint Grade;
+    public uint ATK;
     public string Clan;
     public string Race;
     public string Nation;
@@ -31,5 +31,15 @@ public class JsonParser : MonoBehaviour
         string json = File.ReadAllText(path);
         CardsCollection Cc = JsonUtility.FromJson<CardsCollection>(json);
         return Cc;
+    }
+
+    public List<BaseCard> JsonCardsToBaseCard(CardsCollection CC)
+    {
+        List<BaseCard> baseCardList = new List<BaseCard>();
+
+        foreach(JsonCards dataCard in CC.cards)
+            baseCardList.Add(BaseCard.CreateCardFromJson(dataCard));
+
+        return baseCardList;
     }
 }

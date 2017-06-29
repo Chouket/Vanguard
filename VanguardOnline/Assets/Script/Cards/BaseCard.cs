@@ -21,6 +21,29 @@ public class CardStats
 
 public class BaseCard : MonoBehaviour
 {
+    static public BaseCard CreateCardFromJson(JsonCards jsonCard)
+    {
+        GameObject newCard = Instantiate(Resources.Load<GameObject>("Prefabs/BaseCard"));
+
+        BaseCard tmpCard = newCard.GetComponent<BaseCard>();
+        CardStats tmpStats = tmpCard.CurrentStats;
+
+        tmpStats._atk = jsonCard.ATK;
+        tmpStats._grade = jsonCard.Grade;
+        tmpStats._name = jsonCard.Name;
+        tmpStats._crit = 1;
+        tmpStats._drive = tmpCard.GetDriveFromGrade(jsonCard.Grade);
+        tmpStats._def = tmpCard.GetDefenseFromGrade(jsonCard.Grade);
+
+
+        string textureID = "n"+jsonCard.CardID;
+        SpriteRenderer tmpSripte = newCard.transform.GetChild(0).GetComponent<SpriteRenderer>();
+        tmpSripte.sprite = Resources.Load<Sprite>("CardVisual/ShadowPaladin/" + textureID);
+        newCard.transform.name = tmpStats._name;
+
+        return tmpCard;
+    }
+
     // Use this for initialization
     void Start()
     {
@@ -219,7 +242,8 @@ public class BaseCard : MonoBehaviour
             PlayerManager.Instance._player.Call(this);
         //PlayerManager.Instance._player.Ride(this);
         else if (_currentZone == BaseZone.ZONE.DECK)
-            PlayerManager.Instance._player.TakeDamage();
+            //PlayerManager.Instance._player.TakeDamage();
+            PlayerManager.Instance._player.Draw();
     }
 
     //Variable
