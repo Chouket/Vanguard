@@ -34,9 +34,5 @@ public class PlayerManager : MonoBehaviour {
     {
 	}
 
-    public void tmpAddCardInPlayerHand()
-    {
-    }
-
     public Player _player;
 }

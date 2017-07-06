@@ -97,6 +97,14 @@ public class Deck : BasePile {
     {
         card.SetCurrentZone(ZONE.DECK);
         card.IsFlip = true;
+        card.gameObject.GetComponent<BoxCollider2D>().enabled = false;
     }
 
+    void OnMouseDown()
+    {
+        CardActionUI _cardActionUI = GuiManager.Instance._cardActionUI;
+        _cardActionUI.gameObject.SetActive(true);
+        _cardActionUI.SetDeckAction(this);
+        //PlayerManager.Instance._player.Draw();
+    }
 }

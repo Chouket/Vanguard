@@ -39,6 +39,7 @@ public class Hand : BasePile
 
     protected override void UpdateCardPosition()
     {
+
         Quaternion rot = transform.rotation;
         Vector3 left = _leftAnchor.transform.position;
         Vector3 right = _rightAnchor.transform.position;
@@ -49,8 +50,7 @@ public class Hand : BasePile
         Vector3 offset = 0.01f * Vector3.back;
 
         //evade delta/0 case
-        Vector3 gap = (gapsNb != 0) ? delta / gapsNb + offset : delta;
-
+        Vector3 gap = (gapsNb != 0) ? delta / gapsNb + offset : delta / 2;
 
         for (int idx = 0; idx < cardNb; idx++)
         {
@@ -63,6 +63,7 @@ public class Hand : BasePile
     {
         card.SetCurrentZone(ZONE.HAND);
         card.IsFlip = false;
+        card.gameObject.GetComponent<BoxCollider2D>().enabled = true;
     }
 
     [SerializeField] private GameObject _leftAnchor;

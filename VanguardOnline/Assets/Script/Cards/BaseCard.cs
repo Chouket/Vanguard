@@ -241,9 +241,12 @@ public class BaseCard : MonoBehaviour
         if (_currentZone == BaseZone.ZONE.HAND)
             PlayerManager.Instance._player.Call(this);
         //PlayerManager.Instance._player.Ride(this);
-        else if (_currentZone == BaseZone.ZONE.DECK)
+        //else if (_currentZone == BaseZone.ZONE.DECK)
             //PlayerManager.Instance._player.TakeDamage();
-            PlayerManager.Instance._player.Draw();
+            //PlayerManager.Instance._player.Draw();
+        
+        // Deck call Draw Function when mouse Down
+        // Card hasn't collider when they are in deck
     }
 
     //Variable

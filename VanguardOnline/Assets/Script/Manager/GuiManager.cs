@@ -30,4 +30,5 @@ public class GuiManager : MonoBehaviour
 	}
 
     public CardInspectorUI _cardInspectorUI = null;
+    public CardActionUI _cardActionUI = null;
 }
