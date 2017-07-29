@@ -17,6 +17,7 @@ public class Soul : BasePile
 
     protected override void UpdateCardPosition()
     {
+        Debug.Log("update card soul position");
         Vector3 pos = transform.position;
         Quaternion rot = transform.rotation;
         int cardNb = _cards.Count;

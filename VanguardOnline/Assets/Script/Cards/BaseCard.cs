@@ -239,7 +239,11 @@ public class BaseCard : MonoBehaviour
     {
         Debug.Log("Click on card : " + name);
         if (_currentZone == BaseZone.ZONE.HAND)
-            PlayerManager.Instance._player.Call(this);
+        {
+            PlayerManager.Instance._player.CurrentCard = this;
+            CardActionUI _cardActionUI = GuiManager.Instance._cardActionUI;
+            _cardActionUI.SetMainPhaseAction();
+        }
         //PlayerManager.Instance._player.Ride(this);
         //else if (_currentZone == BaseZone.ZONE.DECK)
             //PlayerManager.Instance._player.TakeDamage();

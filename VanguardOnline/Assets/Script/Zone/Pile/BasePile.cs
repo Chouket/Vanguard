@@ -24,6 +24,8 @@ public abstract class BasePile : BaseZone {
         if (!card)
             return;
 
+        Debug.Log("Add " + card.name + " in soul");
+
         _cards.Add(card);
         UpdateCardCurrentZone(card);
         UpdateCardPosition();

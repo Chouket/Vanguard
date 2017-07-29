@@ -20,8 +20,9 @@ public class VanguardCircle : BaseOneCard
     {
         if (_card)
         {
-            RemoveCard(_card);
+            Debug.Log("will remove previous Vanguard");
             _soul.AddCard(_card);
+            //RemoveCard(_card);
         }
 
         base.AddCard(card);

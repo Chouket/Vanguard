@@ -45,6 +45,7 @@ public class Player : MonoBehaviour {
     public void Ride(BaseCard card)
     {
         Debug.Log("Ride !");
+        Debug.Log("Card to ride: " + card.name);
         _hand.RemoveCard(card);
         _vanguardCircle.AddCard(card);
     }
@@ -93,6 +94,9 @@ public class Player : MonoBehaviour {
     [SerializeField] private RearguardCircle _botLeftRearguardCircle;
     [SerializeField] private RearguardCircle _botCenterRearguardCircle;
     [SerializeField] private RearguardCircle _botRightRearguardCircle;
+
+    private BaseCard _currentCard = null;
+    public BaseCard CurrentCard { get { return _currentCard; } set { _currentCard = value; } }
 
     //Zone
     [SerializeField] private Deck _deck;
